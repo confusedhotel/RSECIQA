@@ -37,11 +37,9 @@ resize(DisImg, dis, Size(NORM_WIDTH, NORM_HEIGHT), 0, 0, INTER_LINEAR);
 ![CSF schematic diagram](https://img-blog.csdnimg.cn/20201031202227381.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
 
 This project uses a CSF model proposed by mannos and sakrison and improved by Daly
-![CSF formula](https://img-blog.csdnimg.cn/20201031204751439.png)
-
-![CSF model](https://img-blog.csdnimg.cn/20201101172517722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
-
-![CSF filtering](https://img-blog.csdnimg.cn/20201101175521365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
+CSF formula(https://img-blog.csdnimg.cn/20201031204751439.png)
+CSF model(https://img-blog.csdnimg.cn/20201101172517722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
+CSF filtering(https://img-blog.csdnimg.cn/20201101175521365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
 
 3. Edge Dectecion</br>
 RGm = pTest->cia->Img_Gradient_Map(RefSal);</br>
