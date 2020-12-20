@@ -27,7 +27,7 @@ Put the image data set in the working directory. Then Change the value of *DBS* 
 ### Predicting
 Run the C++ program and click "test" in the pop-up dialog box. The program will automatically collect the images in the current dataset and make quality score prediction.
 </br>
-For ONE reference image and the corresponding distorted image, </br>
+For ONE reference image and the corresponding distorted image, 
 
 1. Resize</br>
 resize(RefImg, org, Size(NORM_WIDTH, NORM_HEIGHT), 0, 0, INTER_LINEAR);</br>
