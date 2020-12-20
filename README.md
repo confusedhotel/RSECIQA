@@ -26,13 +26,13 @@ Put the image data set in the working directory. Then Change the value of *DBS* 
 
 ### Predicting
 Run the C++ program and click "test" in the pop-up dialog box. The program will automatically collect the images in the current dataset and make quality score prediction.
-</br>
+
 For ONE reference image and the corresponding distorted image, 
 
 1. Resize</br>
 resize(RefImg, org, Size(NORM_WIDTH, NORM_HEIGHT), 0, 0, INTER_LINEAR);</br>
 resize(DisImg, dis, Size(NORM_WIDTH, NORM_HEIGHT), 0, 0, INTER_LINEAR);
-</br>
+
 2. Contrast Sensitivity Function(CSF) filtering, Considering that the human visual system(HVS) plays a decisive role in subjective perception. [Contrast Sensitivity Function](https://blog.csdn.net/ZCF_093/article/details/110478256) can measure the sensitivity of HVS to various visual stimulus frequencies. It reflects that the human eye's discrimination of target brightness is different at different spatial frequencies.
 ![CSF schematic diagram](https://img-blog.csdnimg.cn/20201031202227381.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
 
@@ -46,13 +46,13 @@ RGm = pTest->cia->Img_Gradient_Map(RefSal);</br>
 DGm = pTest->cia->Img_Gradient_Map(DisSal);</br>
 RGm.convertTo(R_W, CV_8UC1, 255.0);</br>
 DGm.convertTo(D_W, CV_8UC1, 255.0);</br>
-</br>
+
 4. Block DCT transform and Reorganize</br>
 pTest->cia->BGRBlkDCT(R_W, RDCTArray);</br>
 pTest->cia->BGRBlkDCT(D_W, DisRDCTArray);</br>
 std::vector<Mat> rd = pTest->cia->dct10subbands(RDCTArray, RDCT, RDCT1);</br>
 std::vector<Mat> dd = pTest->cia->dct10subbands(DisRDCTArray, DisRDCT, DisRDCT1);</br>
-  </br>
+
 5. Calculate Entropy of 10 Subbands. The result of a image contains 10 coefficients.</br>
 for (int k = 0; k < 10; k++) {</br>
 			double rntrpy = 0.0, dntrpy = 0.0;</br>
@@ -82,20 +82,20 @@ for (int k = 0; k < 10; k++) {</br>
 			rtrpy[k] = rntrpy;</br>
 			dtrpy[k] = dntrpy;</br>
 }</br>
-              </br>                  
+             
 6. Calculate Sharpness. The result of a image contains one coefficient. The *Tenegrad function* is used to calculate the sharpness value.</br>
 ap = pTest->cia->TenengradMeasure(ap, RefImg);</br>
 ad = pTest->cia->TenengradMeasure(ad, DisImg);</br>
-      </br>
+
 7. Calculate the 1, 2, 3 Order Color moment. The result of a image contains 9 coefficients. Thus a image is now represented by a 20 dimensional vector.</br>
 pTest->cia->ColorMomentRef(RefImg, Mom1);</br>
 pTest->cia->ColorMomentRef(DisImg, Mom2);</br>
-      </br>
+
 8. After receiving the distorted image and its feature vector **A** at the receiver, the program extracts feature vector **B** of the distorted image and compare the distance between **A** and **B**. Finally, the distance after standardization and nonlinear mapping is the quality score of the distorted image.</br>
-double a = 0.05 * sqrt(ABS(ap - ad));</br>
+double a = 0.05 × sqrt(ABS(ap - ad));</br>
 for (int i = 0; i < 10; i++) b += ABS(rtrpy[i] - dtrpy[i]);</br>
 double c = 1 / exp(sqrt(sqrt(ABS(1 - (Mom1[0] + Mom1[1] + Mom1[2] + Mom1[3] + Mom1[4] + Mom1[5] + Mom1[6] + Mom1[7] + Mom1[8]) / 9))));</br>
-double ***score*** = 9 / (1 + log2(1 + a)) * b * c;</br>
+double ***score*** = 9 / (1 + log2(1 + a)) × b × c;</br>
 
 ### Calculate PLCC and SROCC
 After the prediction is finished, the quality score (predicted value) and real score (real value) files are generated. Result evaluation was then carried out in MATLAB R2019a. PLCC can reflect the accuracy of objective algorithm, while SROCC is used to evaluate the monotonicity of objective models. The two groups of data to be compared need to be nonlinear fitted before PLCC calculation.
