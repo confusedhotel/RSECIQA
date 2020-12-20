@@ -107,7 +107,7 @@ TID2013(https://img-blog.csdnimg.cn/20201220165903174.jpg?x-oss-process=image/wa
 
 The results are compared with the experimental results of other RRIQA method. It can be seen that RSECIQA achieves high performance with the least number of RR features.</br>
  IQA Method	    RR-features 	   SROCC    	        PLCC</br>
-  RSECIQA	       20	           0.5626	        **0.5948**</br>
+  RSECIQA	       **20**	           0.5626	        **0.5948**</br>
   RR-SSIM              36	           0.5526	        0.5842</br>
     RRED       342≤ImageSize/576 	   0.5942	       0.5637</br>
 SPCRM-SCHARR           32	           0.5202	       0.5313</br>
