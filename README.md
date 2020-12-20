@@ -55,32 +55,32 @@ std::vector<Mat> dd = pTest->cia->dct10subbands(DisRDCTArray, DisRDCT, DisRDCT1)
   </br>
 5. Calculate Entropy of 10 Subbands. The result of a image contains 10 coefficients.</br>
 for (int k = 0; k < 10; k++) {</br>
-			>>double rntrpy = 0.0, dntrpy = 0.0;</br>
-			>>double rhist[256] = { 0.0 };</br>
-			>>double dhist[256] = { 0.0 };</br>
-			>>Mat Rt, Dt, RDW, DDW;</br>
-			>>normalize(rd[k], Rt, 0.0, 256.0, NORM_MINMAX);</br>
-			>>normalize(dd[k], Dt, 0.0, 256.0, NORM_MINMAX);</br>
-			>>Rt.convertTo(RDW, CV_16UC1);</br>
-			>>Dt.convertTo(DDW, CV_16UC1);</br>
-			>>for (int i = 0; i < DDW.rows; i++) {</br>
-				>>>>const short* data1 = RDW.ptr<short>(i);</br>
-				>>>>const short* data2 = DDW.ptr<short>(i);</br>
-				>>>>for (int j = 0; j < DDW.cols; j++) {</br>
-					>>>>>>rhist[data1[j]]++;</br>
-					>>>>>>dhist[data2[j]]++;</br>
-				>>>>}</br>
-			>>}</br>
-			>>for (int i = 0; i < 256; i++) {</br>
-			>>>>	rhist[i] /= (RDW.rows * RDW.cols);</br>
-			>>>>	dhist[i] /= (DDW.rows * DDW.cols);</br>
-			>>}</br>
-			>>for (int i = 0; i < 256; i++) {</br>
-			>>>>	rntrpy += (-rhist[i] * (log2(1 + rhist[i])));</br>
-			>>>>	dntrpy += (-dhist[i] * (log2(1 + dhist[i])));</br>
-			>>}</br>
-			>>rtrpy[k] = rntrpy;</br>
-			>>dtrpy[k] = dntrpy;</br>
+			double rntrpy = 0.0, dntrpy = 0.0;</br>
+			double rhist[256] = { 0.0 };</br>
+			double dhist[256] = { 0.0 };</br>
+			Mat Rt, Dt, RDW, DDW;</br>
+			normalize(rd[k], Rt, 0.0, 256.0, NORM_MINMAX);</br>
+			normalize(dd[k], Dt, 0.0, 256.0, NORM_MINMAX);</br>
+			Rt.convertTo(RDW, CV_16UC1);</br>
+			Dt.convertTo(DDW, CV_16UC1);</br>
+			for (int i = 0; i < DDW.rows; i++) {</br>
+			const short* data1 = RDW.ptr<short>(i);</br>
+			const short* data2 = DDW.ptr<short>(i);</br>
+			for (int j = 0; j < DDW.cols; j++) {</br>
+			rhist[data1[j]]++;</br>
+			dhist[data2[j]]++;</br>
+			}</br>
+			}</br>
+			for (int i = 0; i < 256; i++) {</br>
+			rhist[i] /= (RDW.rows * RDW.cols);</br>
+			dhist[i] /= (DDW.rows * DDW.cols);</br>
+			}</br>
+			for (int i = 0; i < 256; i++) {</br>
+			rntrpy += (-rhist[i] * (log2(1 + rhist[i])));</br>
+			dntrpy += (-dhist[i] * (log2(1 + dhist[i])));</br>
+			}</br>
+			rtrpy[k] = rntrpy;</br>
+			dtrpy[k] = dntrpy;</br>
 }</br>
               </br>                  
 6. Calculate Sharpness. The result of a image contains one coefficient. The *Tenegrad function* is used to calculate the sharpness value.</br>
@@ -101,14 +101,14 @@ pTest->cia->ColorMomentRef(DisImg, Mom2);</br>
 After the prediction is finished, the quality score (predicted value) and real score (real value) files are generated. Result evaluation was then carried out in MATLAB R2019a. PLCC can reflect the accuracy of objective algorithm, while SROCC is used to evaluate the monotonicity of objective models. The two groups of data to be compared need to be nonlinear fitted before PLCC calculation.
 </br>
 ### Visualization of Results
-![TID2008](https://img-blog.csdnimg.cn/20201220165637424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
+TID2008(https://img-blog.csdnimg.cn/20201220165637424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
 
-![TID2013](https://img-blog.csdnimg.cn/20201220165903174.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
+TID2013(https://img-blog.csdnimg.cn/20201220165903174.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
 
 The results are compared with the experimental results of other RRIQA method. It can be seen that RSECIQA achieves high performance with the least number of RR features.</br>
- IQA Method	>>>>    RR-features >>>>	   SROCC    >>>>	        PLCC</br>
-  RSECIQA	 >>>>>>      20	 >>>>>>          0.5626	    >>>>>>    **0.5948**</br>
-  RR-SSIM       >>>>>>       36	       >>>>>>    0.5526	     >>>>>>   0.5842</br>
-    RRED     >>>>>>  342≤ImageSize/576 	>>>>>>   0.5942	   >>>>>>     0.5637</br>
-SPCRM-SCHARR     >>>>>>      32	        >>>>>>   0.5202	   >>>>>>     0.5313</br>
+ IQA Method	    RR-features 	   SROCC    	        PLCC</br>
+  RSECIQA	       20	           0.5626	        **0.5948**</br>
+  RR-SSIM              36	           0.5526	        0.5842</br>
+    RRED       342≤ImageSize/576 	   0.5942	       0.5637</br>
+SPCRM-SCHARR           32	           0.5202	       0.5313</br>
 
