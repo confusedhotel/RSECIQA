@@ -28,7 +28,7 @@ Put the image data set in the working directory. Then Change the value of *DBS* 
 Run the C++ program and click "test" in the pop-up dialog box. The program will automatically collect the images in the current dataset and make quality score prediction.
 </br>
 For ONE reference image and the corresponding distorted image, </br>
-</br>
+
 1. Resize</br>
 resize(RefImg, org, Size(NORM_WIDTH, NORM_HEIGHT), 0, 0, INTER_LINEAR);</br>
 resize(DisImg, dis, Size(NORM_WIDTH, NORM_HEIGHT), 0, 0, INTER_LINEAR);
@@ -92,14 +92,14 @@ pTest->cia->ColorMomentRef(RefImg, Mom1);</br>
 pTest->cia->ColorMomentRef(DisImg, Mom2);</br>
       </br>
 8. After receiving the distorted image and its feature vector **A** at the receiver, the program extracts feature vector **B** of the distorted image and compare the distance between **A** and **B**. Finally, the distance after standardization and nonlinear mapping is the quality score of the distorted image.</br>
->>double a = 0.05 * sqrt(ABS(ap - ad));</br>
->>for (int i = 0; i < 10; i++) b += ABS(rtrpy[i] - dtrpy[i]);</br>
->>double c = 1 / exp(sqrt(sqrt(ABS(1 - (Mom1[0] + Mom1[1] + Mom1[2] + Mom1[3] + Mom1[4] + Mom1[5] + Mom1[6] + Mom1[7] + Mom1[8]) / 9))));</br>
->>double ***score*** = 9 / (1 + log2(1 + a)) * b * c;</br>
-</br>
+double a = 0.05 * sqrt(ABS(ap - ad));</br>
+for (int i = 0; i < 10; i++) b += ABS(rtrpy[i] - dtrpy[i]);</br>
+double c = 1 / exp(sqrt(sqrt(ABS(1 - (Mom1[0] + Mom1[1] + Mom1[2] + Mom1[3] + Mom1[4] + Mom1[5] + Mom1[6] + Mom1[7] + Mom1[8]) / 9))));</br>
+double ***score*** = 9 / (1 + log2(1 + a)) * b * c;</br>
+
 ### Calculate PLCC and SROCC
 After the prediction is finished, the quality score (predicted value) and real score (real value) files are generated. Result evaluation was then carried out in MATLAB R2019a. PLCC can reflect the accuracy of objective algorithm, while SROCC is used to evaluate the monotonicity of objective models. The two groups of data to be compared need to be nonlinear fitted before PLCC calculation.
-</br>
+
 ### Visualization of Results
 TID2008(https://img-blog.csdnimg.cn/20201220165637424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
 
