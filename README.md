@@ -27,7 +27,7 @@ Put the image data set in the working directory. Then Change the value of *DBS* 
 ### Predicting
 Run the C++ program and click "test" in the pop-up dialog box. The program will automatically collect the images in the current dataset and make quality score prediction.
 
-For ONE reference image and the corresponding distorted image, 
+For ONE reference image and the corresponding distorted images, 
 
 1. Resize</br>
 resize(RefImg, org, Size(NORM_WIDTH, NORM_HEIGHT), 0, 0, INTER_LINEAR);</br>
@@ -105,7 +105,7 @@ TID2008(https://img-blog.csdnimg.cn/20201220165637424.png?x-oss-process=image/wa
 
 TID2013(https://img-blog.csdnimg.cn/20201220165903174.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pDRl8wOTM=,size_16,color_FFFFFF,t_70)
 
-The results are compared with the experimental results of other RRIQA method. It can be seen that RSECIQA achieves high performance with the least number of RR features.</br>
+The results are compared with the experimental results of other RRIQA method on TID2013. It can be seen that RSECIQA achieves high performance with the least number of RR features.</br>
  IQA Method	    RR-features 	   SROCC    	        PLCC</br>
   RSECIQA	       **20**	           0.5626	        **0.5948**</br>
   RR-SSIM              36	           0.5526	        0.5842</br>
